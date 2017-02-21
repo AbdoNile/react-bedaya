@@ -7,15 +7,14 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var OUTPUT_DIR = path.resolve(__dirname, 'public/assets');
 var APP_DIR = path.resolve(__dirname, 'src/client');
 var config = {
-    watch : true,
-
     entry:  {
-        app : path.resolve(APP_DIR, 'app/index.js')
+        client_code : path.resolve(APP_DIR, 'app/index.js')
+   
     },
     output: {
         path: OUTPUT_DIR ,
-        filename: 'bundle.js',
-         sourceMapFilename: "bundle.js.map"
+         filename: '[name].js',
+         sourceMapFilename: "[name].js.map"
  
     },
 
@@ -29,9 +28,9 @@ var config = {
        new HtmlWebpackPlugin({
             filename :  'index2.html'
         }),
-        new ExtractTextPlugin("[name].css"),
-        /*new webpack.optimize.CommonsChunkPlugin({
-            name: 'ThirdParty',
+        new ExtractTextPlugin("[name].css"),/*
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'third_party',
             minChunks: function (module) {
                 // this assumes your vendor imports exist in the node_modules directory
                 return module.context && module.context.indexOf('node_modules') !== -1;
@@ -58,8 +57,7 @@ var config = {
             },
             {
                 test: /\.css$/,
-                include: APP_DIR,
-                loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader' })
+                loader: ExtractTextPlugin.extract({ loader: 'css-loader' })
             },
             {
                 test: /\.png$/,

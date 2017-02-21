@@ -1,5 +1,6 @@
 import React from 'react';
 import FieldEditor from '../components/fieldEditor';
+import FieldMetaData from '../services/fieldData';
 
 class FieldGroup extends React.Component {
   constructor() {
@@ -15,19 +16,8 @@ class FieldGroup extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({ fields:  [
-        {
-            label : "Council Tax Number",
-            datatype : "string"
-        },
-          {
-            label : "Council Tax Address",
-            datatype : "datetime"
-        },  {
-            label : "Council Tax Amount",
-            datatype : "numbers"
-        }
-    ]  });
+     var fieldMetaData = new FieldMetaData();
+    this.setState({ fields: fieldMetaData.CouncilTaxFields  });
   }
 }
 
